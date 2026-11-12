@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="lo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="ແມ່ແບບຄລິບກາຕູນສົ່ງນ້ຳດື່ມ 10 ວິນາທີ ແນວຕັ້ງສຳລັບ TikTok">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>ສະຕູດິໂອຄລິບສົ່ງນ້ຳ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&family=IBM+Plex+Sans+Thai:wght@400;600&family=Noto+Sans+Lao:wght@400;600;700&display=swap">
+<style>
+/* Layout: phone-shaped live preview beside a single settings column; stacks preview-first on phones */
+:root {
+  --bg: #eef4f9; --panel: #ffffff; --fg: #10233a; --muted: #5a6f86; --line: #d3e0ec;
+  --accent: #1468c8; --accent-fg: #ffffff; --accent-soft: #dceafb; --ok: #1d7f4e; --warn: #a65b00;
+  --display: "Noto Sans Lao", "Kanit", system-ui, sans-serif;
+  --body: "Noto Sans Lao", "IBM Plex Sans Thai", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b1622; --panel: #13212f; --fg: #e5eef7; --muted: #93a8bd; --line: #24384c;
+  --accent: #4d9cf0; --accent-fg: #06121f; --accent-soft: #17324f; --ok: #5cc690; --warn: #f0a653; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b1622; --panel: #13212f; --fg: #e5eef7; --muted: #93a8bd; --line: #24384c;
+  --accent: #4d9cf0; --accent-fg: #06121f; --accent-soft: #17324f; --ok: #5cc690; --warn: #f0a653; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: 4px; margin-bottom: 22px; }
+h1 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.2; margin: 0; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); max-width: 62ch; }
+.grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 12px; justify-items: center; }
+@media (max-width: 760px) { .stage { position: static; } }
+.phone { width: 100%; max-width: 320px; aspect-ratio: 9 / 16; border-radius: 28px; overflow: hidden;
+  border: 8px solid #1b2733; background: #1b2733; box-shadow: 0 18px 40px -18px rgba(10, 30, 60, .45); }
+.phone canvas, .phone video { width: 100%; height: 100%; display: block; }
+.transport { display: flex; gap: 10px; align-items: center; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+form { display: grid; gap: 22px; min-width: 0; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; }
+legend { font-family: var(--display); font-weight: 500; font-size: 13px; letter-spacing: .06em; color: var(--muted); padding: 0; margin-bottom: 10px; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 480px) { .row { grid-template-columns: minmax(0, 1fr); } }
+label { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+label small { font-weight: 400; color: var(--muted); }
+input[type="text"], input[type="tel"] { font: inherit; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--fg); min-width: 0; }
+input[type="range"] { accent-color: var(--accent); width: 100%; }
+input[type="color"] { width: 52px; height: 38px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 3px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: fit-content; }
+.seg label { display: block; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg span { display: block; padding: 7px 14px; font-weight: 400; cursor: pointer; }
+.seg input:checked + span { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.seg input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: -3px; }
+.inline { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.check { display: flex; gap: 8px; align-items: center; font-weight: 400; }
+.check input[type="checkbox"] { accent-color: var(--accent); width: 18px; height: 18px; }
+.actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-top: 4px; border-top: 1px solid var(--line); padding-block: 18px 0; }
+button { font: inherit; cursor: pointer; border-radius: 8px; }
+.primary { background: var(--accent); color: var(--accent-fg); border: 0; padding: 12px 22px; font-family: var(--display); font-weight: 500; font-size: 16px; }
+.primary:disabled { opacity: .55; cursor: progress; }
+.ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); padding: 9px 14px; font-size: 14px; }
+.small { padding: 5px 12px; font-size: 13px; }
+.bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; flex: 1 1 140px; min-width: 120px; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+.result { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 10px; }
+.result h2 { font-family: var(--display); font-weight: 500; font-size: 18px; margin: 0; }
+.status { margin: 0; font-size: 14px; color: var(--muted); }
+.status.ok { color: var(--ok); } .status.warn { color: var(--warn); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>ສະຕູດິໂອຄລິບສົ່ງນ້ຳ</h1>
+    <p>ໃສ່ຂໍ້ຄວາມຂອງຮ້ານ ເບິ່ງຕົວຢ່າງສົດ ແລ້ວກົດສ້າງຄລິບກາຕູນ 10 ວິນາທີ ແນວຕັ້ງ 9:16 ພ້ອມເພງ ສຳລັບ TikTok, Reels ແລະ Shorts</p>
+  </header>
+
+  <div class="grid">
+    <div class="stage">
+      <div class="phone"><canvas id="cv" width="1080" height="1920" aria-label="ຕົວຢ່າງຄລິບ"></canvas></div>
+      <div class="transport">
+        <button type="button" class="ghost small" id="playBtn" aria-pressed="true">ຢຸດຕົວຢ່າງ</button>
+        <span id="clock">0.0 / 10.0 ວິ</span>
+      </div>
+    </div>
+
+    <form id="f" autocomplete="off">
+      <fieldset>
+        <legend>ຂໍ້ຄວາມເທິງຈໍ</legend>
+        <label>ຫົວເລື່ອງ <small>ຂຶ້ນທີ່ 0.3 ວິ</small><input type="text" id="title" maxlength="40"></label>
+        <div class="row">
+          <label>ຂໍ້ຄວາມຮອງ <small>1.2 ວິ</small><input type="text" id="subtitle" maxlength="40"></label>
+          <label>ຂໍ້ຄວາມຂ້າງລົດ <small>ສັ້ນໆ</small><input type="text" id="side" maxlength="20"></label>
+        </div>
+        <label>ສະໂລແກນ <small>7.6 ວິ</small><input type="text" id="tagline" maxlength="50"></label>
+        <label>ຄຳຊວນສັ່ງ <small>8.8 ວິ</small><input type="text" id="cta" maxlength="24"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>ຂໍ້ມູນຮ້ານ (ຂຶ້ນຕອນຈົບ ປ່ອຍຫວ່າງໄດ້)</legend>
+        <div class="row">
+          <label>ຊື່ຮ້ານ<input type="text" id="shop" maxlength="40" placeholder="ເຊັ່ນ ນ້ຳດື່ມໃຈສະອາດ"></label>
+          <label>ເບີໂທ / WhatsApp<input type="tel" id="phone" maxlength="30" placeholder="ເຊັ່ນ 020 5555 1234"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>ໜ້າຕາ</legend>
+        <div class="inline">
+          <label class="check" for="cab">ສີລົດ <input type="color" id="cab"></label>
+          <div class="seg" role="radiogroup" aria-label="ຊ່ວງເວລາ">
+            <label><input type="radio" name="sky" value="day" id="skyDay"><span>ກາງເວັນ</span></label>
+            <label><input type="radio" name="sky" value="dusk" id="skyDusk"><span>ຕອນແລງ</span></label>
+          </div>
+          <label class="check"><input type="checkbox" id="music"> ໃສ່ເພງ</label>
+        </div>
+        <label>ຈຳນວນຕຸກເທິງລົດ: <span id="jugsOut"></span><input type="range" id="jugs" min="1" max="7" step="1"></label>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" class="primary" id="recBtn">ສ້າງຄລິບ 10 ວິ</button>
+        <button type="button" class="ghost" id="resetBtn">ໃຊ້ຄ່າເລີ່ມຕົ້ນ</button>
+        <div class="bar" id="bar" hidden><i id="barFill"></i></div>
+      </div>
+      <p class="status" id="status">ກົດສ້າງຄລິບ ລະບົບຈະແຕ້ມເທື່ອລະເຟຣມແລ້ວລວມເປັນ MP4 ໃຊ້ເວລາບໍ່ເທົ່າໃດວິນາທີ</p>
+
+      <section class="result" id="result" hidden aria-live="polite">
+        <h2>ຄລິບພ້ອມແລ້ວ</h2>
+        <video id="out" controls playsinline style="max-width:240px;border-radius:10px"></video>
+        <div class="inline">
+          <button type="button" class="primary" id="saveBtn">ບັນທຶກໄຟລ໌</button>
+          <span class="status" id="fileInfo"></span>
+        </div>
+        <p class="status" id="saveStatus"></p>
+      </section>
+    </form>
+  </div>
+</div>
+
+<script>
+document.documentElement.lang = "lo";
+const DEFAULTS = { title: "ສົ່ງນ້ຳດື່ມເຖິງບ້ານ", subtitle: "ຕຸກໃຫຍ່ 18 ລິດ", side: "ນ້ຳດື່ມສະອາດ",
+  tagline: "ສະອາດ • ວ່ອງໄວ • ກົງເວລາ", cta: "ສັ່ງເລີຍ!", shop: "", phone: "",
+  cab: "#1e78dc", sky: "day", music: true, jugs: 7 };
+const KEY = "water-clip-studio-v1";
+const $ = (id) => document.getElementById(id);
+let cfg = { ...DEFAULTS };
+try { Object.assign(cfg, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+// earlier Thai version: swap untouched Thai defaults for Lao ones, keep anything the user typed
+const OLD_TH = { title: "ส่งน้ำดื่มถึงบ้าน", subtitle: "ถังใหญ่ 18 ลิตร", side: "น้ำดื่มสะอาด", tagline: "สะอาด • รวดเร็ว • ตรงเวลา", cta: "สั่งเลย!" };
+for (const k in OLD_TH) if (cfg[k] === OLD_TH[k]) cfg[k] = DEFAULTS[k];
+
+function toForm() {
+  for (const k of ["title", "subtitle", "side", "tagline", "cta", "shop", "phone", "cab"]) $(k).value = cfg[k];
+  $(cfg.sky === "dusk" ? "skyDusk" : "skyDay").checked = true;
+  $("music").checked = !!cfg.music; $("jugs").value = cfg.jugs; $("jugsOut").textContent = cfg.jugs + " ຕຸກ";
+}
+function fromForm() {
+  for (const k of ["title", "subtitle", "side", "tagline", "cta", "shop", "phone", "cab"]) cfg[k] = $(k).value.trim();
+  cfg.cab = /^#[0-9a-f]{6}$/i.test(cfg.cab) ? cfg.cab : DEFAULTS.cab;
+  cfg.sky = $("skyDusk").checked ? "dusk" : "day"; cfg.music = $("music").checked; cfg.jugs = +$("jugs").value;
+  $("jugsOut").textContent = cfg.jugs + " ຕຸກ";
+  try { localStorage.setItem(KEY, JSON.stringify(cfg)); } catch (e) {}
+}
+toForm();
+$("f").addEventListener("input", fromForm);
+// reset the on-screen texts and look, keep the shop name and phone the user typed
+$("resetBtn").onclick = () => { cfg = { ...DEFAULTS, shop: cfg.shop, phone: cfg.phone }; toForm(); fromForm(); };
+
+// ---------- drawing (1080x1920, same scene as the Python skill) ----------
+const W = 1080, H = 1920, G = 1450, FPS = 30, DUR = 10, HOUSE_X = 640;
+const cv = $("cv"), c = cv.getContext("2d");
+const FONT = '"Kanit", "Noto Sans Lao", sans-serif';
+const ease = (x) => { x = Math.min(1, Math.max(0, x)); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const back = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const speedAt = (f) => f < 7 * FPS ? 18 : 18 * (1 - ease((f - 7 * FPS) / (1.5 * FPS)));
+const SCROLL = [0]; for (let f = 1; f <= FPS * DUR + 1; f++) SCROLL.push(SCROLL[f - 1] + speedAt(f - 1));
+const S_END = SCROLL[FPS * DUR - 1];
+const scrollAt = (t) => { const f = Math.min(t * FPS, FPS * DUR), i = Math.floor(f); return SCROLL[i] + (SCROLL[i + 1] - SCROLL[i]) * (f - i); };
+
+function rr(x0, y0, x1, y1, r, fill, stroke, lw) { c.beginPath(); c.roundRect(x0, y0, x1 - x0, y1 - y0, r);
+  if (fill) { c.fillStyle = fill; c.fill(); } if (stroke) { c.strokeStyle = stroke; c.lineWidth = lw; c.stroke(); } }
+function el(x0, y0, x1, y1, fill) { c.beginPath(); c.ellipse((x0 + x1) / 2, (y0 + y1) / 2, Math.abs(x1 - x0) / 2, Math.abs(y1 - y0) / 2, 0, 0, Math.PI * 2); c.fillStyle = fill; c.fill(); }
+function poly(pts, fill, stroke, lw) { c.beginPath(); pts.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath();
+  c.fillStyle = fill; c.fill(); if (stroke) { c.strokeStyle = stroke; c.lineWidth = lw; c.stroke(); } }
+function ln(x0, y0, x1, y1, col, w) { c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.strokeStyle = col; c.lineWidth = w; c.lineCap = "round"; c.stroke(); }
+function shade(hex, k) { const n = parseInt(hex.slice(1), 16); const f = (v) => Math.round(v * k);
+  return `rgb(${f(n >> 16)},${f((n >> 8) & 255)},${f(n & 255)})`; }
+
+function fitText(s, size, maxW, weight = 700) { c.font = `${weight} ${size}px ${FONT}`; const w = c.measureText(s).width; return w > maxW ? size * maxW / w : size; }
+function say(s, cx, cy, size, prog, fill, stroke = "#0f3278", maxW = 900) {
+  if (!s || prog <= 0) return; const sc = back(Math.min(1, prog)); const sz = fitText(s, size, maxW) * sc;
+  c.font = `700 ${sz}px ${FONT}`; c.textAlign = "center"; c.textBaseline = "middle"; c.lineJoin = "round";
+  c.lineWidth = Math.max(4, 20 * sc * sz / size); c.strokeStyle = stroke; c.strokeText(s, cx, cy); c.fillStyle = fill; c.fillText(s, cx, cy);
+}
+function cloud(x, y, s, col) { for (const [dx, dy, r] of [[0, 0, 60], [60, -30, 70], [130, 0, 60], [65, 20, 60]]) el(x + dx * s - r * s, y + dy * s - r * s, x + dx * s + r * s, y + dy * s + r * s, col); }
+function jug(x, y, w = 96, h = 128) {
+  rr(x, y + 22, x + w, y + h, 22, "rgb(90,180,245)", "rgb(30,90,170)", 4);
+  rr(x + w * .3, y + 4, x + w * .7, y + 26, 0, "rgb(90,180,245)", "rgb(30,90,170)", 4);
+  rr(x + w * .26, y - 8, x + w * .74, y + 8, 0, "rgb(20,70,160)");
+  rr(x + 14, y + 38, x + 26, y + h - 18, 6, "rgb(220,245,255)");
+}
+function wheel(cx, cy, r, a) { el(cx - r, cy - r, cx + r, cy + r, "rgb(40,40,50)"); el(cx - r * .55, cy - r * .55, cx + r * .55, cy + r * .55, "rgb(200,200,210)");
+  for (let i = 0; i < 4; i++) { const q = a + i * Math.PI / 2; ln(cx, cy, cx + r * .5 * Math.cos(q), cy + r * .5 * Math.sin(q), "rgb(90,90,100)", 8); } }
+function truck(x, dy, ang, t) {
+  const y = G + dy;
+  el(x + 20, G - 14, x + 740, G + 22, "rgba(30,50,30,.35)");
+  rr(x + 10, y - 120, x + 720, y - 86, 0, "rgb(60,60,70)");
+  const n = cfg.jugs, bottom = Math.min(4, n), top = n - bottom;
+  for (let i = 0; i < bottom; i++) jug(x + 22 + i * 112 + (4 - bottom) * 56, y - 300);
+  for (let i = 0; i < top; i++) jug(x + 78 + i * 112 + (3 - top) * 56, y - 426);
+  rr(x, y - 196, x + 480, y - 100, 14, "#fff", "rgb(30,90,170)", 6);
+  if (cfg.side) { c.font = `700 ${fitText(cfg.side, 56, 440)}px ${FONT}`; c.textAlign = "center"; c.textBaseline = "middle"; c.fillStyle = "rgb(20,90,190)"; c.fillText(cfg.side, x + 240, y - 148); }
+  rr(x + 490, y - 350, x + 730, y - 100, 40, cfg.cab, shade(cfg.cab, .5), 6);
+  rr(x + 530, y - 325, x + 705, y - 220, 22, "rgb(200,235,255)", shade(cfg.cab, .5), 5);
+  const hx = x + 610, hy = y - 262;
+  el(hx - 42, hy - 40, hx + 42, hy + 44, "rgb(255,220,185)");
+  c.beginPath(); c.ellipse(hx, hy - 18, 48, 38, 0, Math.PI, Math.PI * 2); c.closePath(); c.fillStyle = "rgb(40,30,60)"; c.fill();
+  const blink = (t % 3) < .12;
+  for (const ex of [hx - 16, hx + 20]) {
+    if (blink) ln(ex - 9, hy + 6, ex + 9, hy + 6, "rgb(30,30,60)", 4);
+    else { el(ex - 9, hy - 6, ex + 9, hy + 18, "rgb(40,40,90)"); el(ex - 4, hy - 2, ex + 2, hy + 5, "#fff"); }
+  }
+  c.beginPath(); c.ellipse(hx + 2, hy + 22, 12, 8, 0, 0, Math.PI); c.strokeStyle = "rgb(180,60,60)"; c.lineWidth = 4; c.stroke();
+  el(hx - 36, hy + 14, hx - 24, hy + 22, "rgb(255,170,170)"); el(hx + 28, hy + 14, hx + 40, hy + 22, "rgb(255,170,170)");
+  rr(x + 700, y - 170, x + 745, y - 130, 10, "rgb(255,230,90)");
+  rr(x + 720, y - 120, x + 760, y - 90, 8, "rgb(170,170,180)");
+  wheel(x + 140, G - 62, 62, ang); wheel(x + 600, G - 62, 62, ang);
+}
+function house(x) { const y = G - 40;
+  rr(x, y - 330, x + 420, y, 0, "rgb(255,235,200)", "rgb(150,100,60)", 6);
+  poly([[x - 40, y - 330], [x + 210, y - 500], [x + 460, y - 330]], "rgb(220,80,70)", "rgb(140,40,40)", 2);
+  rr(x + 280, y - 200, x + 370, y, 0, "rgb(150,95,55)");
+  el(x + 345, y - 105, x + 357, y - 93, "rgb(255,210,80)");
+  rr(x + 50, y - 260, x + 190, y - 150, 0, "rgb(180,225,255)", "rgb(150,100,60)", 5);
+}
+function star(cx, cy, r) { const p = []; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, q = i % 2 ? r * .45 : r; p.push([cx + q * Math.cos(a), cy + q * Math.sin(a)]); } poly(p, "rgb(255,230,80)"); }
+
+const THEMES = {
+  day: { sky: ["rgb(120,190,255)", "rgb(240,240,235)"], sun: [760, 180, "rgb(255,240,150)", "rgb(255,210,80)"], cloud: "#fff",
+    mount: "rgb(110,170,140)", bld: "rgb(150,175,215)", win: "rgb(230,240,255)", grass: "rgb(120,200,110)", tree: "rgb(60,160,80)" },
+  dusk: { sky: ["rgb(255,130,100)", "rgb(255,215,160)"], sun: [700, 760, "rgb(255,210,140)", "rgb(255,150,70)"], cloud: "rgb(255,225,210)",
+    mount: "rgb(150,110,140)", bld: "rgb(120,110,160)", win: "rgb(255,220,120)", grass: "rgb(110,160,90)", tree: "rgb(60,120,70)" },
+};
+
+function frame(t) {
+  const s = scrollAt(t), f = Math.floor(t * FPS), th = THEMES[cfg.sky] || THEMES.day;
+  const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, th.sky[0]); g.addColorStop(1, th.sky[1]);
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  const [sx, sy, s1, s2] = th.sun; el(sx, sy, sx + 200, sy + 200, s1); el(sx + 30, sy + 30, sx + 170, sy + 170, s2);
+  for (let i = 0; i < 3; i++) { const m = W + 500; cloud((((i * 480 + 200 - s * .15 - t * 10) % m) + m) % m - 250, 470 + i * 70, 1 - i * .15, th.cloud); }
+  for (let i = -1; i < 5; i++) { const mx = i * 420 - (s * .3) % 420; poly([[mx, 1150], [mx + 210, 820 + (((i % 2) + 2) % 2) * 60], [mx + 420, 1150]], th.mount); }
+  for (let i = -1; i < 9; i++) {
+    const bx = i * 170 - (s * .6) % 170, h = 180 + ((((i + Math.floor(s * .6 / 170)) * 53) % 160) + 160) % 160;
+    rr(bx, 1150 - h, bx + 130, 1150, 0, th.bld);
+    for (let wy = 1150 - h + 20; wy < 1130; wy += 45) { rr(bx + 20, wy, bx + 50, wy + 22, 0, th.win); rr(bx + 80, wy, bx + 110, wy + 22, 0, th.win); }
+  }
+  rr(0, 1150, W, G - 40, 0, th.grass);
+  for (let i = -1; i < 8; i++) { const tx = i * 200 - (s * .85) % 200; rr(tx + 40, 1260, tx + 56, 1330, 0, "rgb(130,85,50)"); el(tx, 1170, tx + 96, 1280, th.tree); }
+  house(HOUSE_X + (S_END - s));
+  rr(0, G - 40, W, H, 0, "rgb(70,75,85)"); rr(0, G - 40, W, G - 28, 0, "rgb(230,230,230)");
+  for (let i = -1; i < 8; i++) { const lx = i * 220 - s % 220; rr(lx, G + 130, lx + 120, G + 150, 0, "rgb(255,220,90)"); }
+  if (t > 1 && t < 7.4) for (let i = 0; i < 8; i++) { const ly = 700 + (i * 97) % 600, lx = W - ((f * 60 + i * 300) % (W + 600)); ln(lx, ly, lx + 160, ly, "rgba(255,255,255,.9)", 5); }
+  const tx = -820 + 960 * ease(t / 1.2) - 270 * ease((t - 7) / 1.5);
+  const moving = speedAt(f) > .5 || t < 1.2;
+  truck(tx, moving ? 5 * Math.sin(t * 2 * Math.PI * 4) : 0, -s / 62, t);
+  if (t > 8.3) {
+    const k = Math.min(1, (t - 8.3) / .9), x0 = tx + 360, y0 = G - 430, x1 = HOUSE_X + 300, y1 = G - 240;
+    jug(x0 + (x1 - x0) * k, y0 + (y1 - y0) * k - 260 * Math.sin(Math.PI * k), 80, 106);
+    if (k >= 1) for (let i = 0; i < 5; i++) { const a = i * 2 * Math.PI / 5 + t * 3; star(x1 + 40 + 110 * Math.cos(a), y1 + 50 + 110 * Math.sin(a), 22 + 6 * Math.sin(t * 12 + i)); }
+  }
+  const cx = W / 2 - 40; // keep clear of TikTok's right-side buttons
+  say(cfg.title, cx, 330, 104, (t - .3) / .5, "#fff");
+  say(cfg.subtitle, cx, 480, 80, (t - 1.2) / .5, "rgb(255,230,90)");
+  say(cfg.tagline, cx, 640, 70, (t - 7.6) / .5, "#fff");
+  say(cfg.cta, cx, 800, 130, (t - 8.8) / .5, "rgb(255,90,90)", "#fff");
+  say(cfg.shop, cx, 950, 64, (t - 9.1) / .4, "#fff");
+  say(cfg.phone, cx, 1040, 72, (t - 9.3) / .4, "rgb(255,230,90)");
+}
+
+// ---------- preview loop ----------
+let playing = true, t0 = performance.now(), pausedAt = 0, recording = null, exporting = false;
+function loop(now) {
+  if (exporting) { requestAnimationFrame(loop); return; } // export draws frames itself
+  let t;
+  if (recording) t = Math.min(DUR, (now - recording.start) / 1000);
+  else if (playing) t = ((now - t0) / 1000) % (DUR + 1.5);
+  else t = pausedAt;
+  const tt = Math.min(t, DUR - 1 / FPS);
+  frame(tt); $("clock").textContent = `${tt.toFixed(1)} / ${DUR.toFixed(1)} ວິ`;
+  if (recording) { $("barFill").style.width = (t / DUR * 100) + "%"; if (t >= DUR && recording.rec.state === "recording") recording.rec.stop(); }
+  requestAnimationFrame(loop);
+}
+$("playBtn").onclick = () => {
+  playing = !playing; const now = performance.now();
+  if (playing) t0 = now - pausedAt * 1000; else pausedAt = ((now - t0) / 1000) % (DUR + 1.5);
+  $("playBtn").textContent = playing ? "ຢຸດຕົວຢ່າງ" : "ຫຼິ້ນຕົວຢ່າງ"; $("playBtn").setAttribute("aria-pressed", playing);
+};
+const fontsReady = document.fonts ? Promise.all([document.fonts.load(`700 80px Kanit`), document.fonts.load(`700 80px "Noto Sans Lao"`, "ສົ່ງນ້ຳດື່ມ")]).catch(() => {}) : Promise.resolve();
+fontsReady.then(() => requestAnimationFrame(loop));
+
+// ---------- music (WebAudio, generated — no copyright) ----------
+function music(ac, out, start) {
+  const beat = 60 / 128, master = ac.createGain(); master.gain.value = 1; master.connect(out);
+  master.gain.setValueAtTime(1, start + DUR - .5); master.gain.linearRampToValueAtTime(0, start + DUR);
+  const noise = ac.createBuffer(1, ac.sampleRate * .05, ac.sampleRate); const nd = noise.getChannelData(0);
+  for (let i = 0; i < nd.length; i++) nd[i] = (Math.random() * 2 - 1) * Math.exp(-i / ac.sampleRate * 90);
+  for (let b = 0; b * beat < DUR; b++) {
+    const at = start + b * beat, o = ac.createOscillator(), gk = ac.createGain();
+    o.frequency.setValueAtTime(120, at); o.frequency.exponentialRampToValueAtTime(40, at + .15);
+    gk.gain.setValueAtTime(.5, at); gk.gain.exponentialRampToValueAtTime(.001, at + .18);
+    o.connect(gk).connect(master); o.start(at); o.stop(at + .2);
+    const hs = ac.createBufferSource(), gh = ac.createGain(); hs.buffer = noise; gh.gain.value = .12;
+    hs.connect(gh).connect(master); hs.start(at + beat / 2);
+  }
+  const notes = [72, 76, 79, 76, 81, 79, 76, 74];
+  for (let i = 0; i * beat / 2 < DUR; i++) {
+    const at = start + i * beat / 2, o = ac.createOscillator(), gm = ac.createGain();
+    o.type = "square"; o.frequency.value = 440 * Math.pow(2, (notes[i % 8] - 69) / 12);
+    gm.gain.setValueAtTime(.07, at); gm.gain.exponentialRampToValueAtTime(.002, at + beat / 2);
+    o.connect(gm).connect(master); o.start(at); o.stop(at + beat / 2);
+  }
+}
+
+// ---------- export ----------
+// Main path: draw each frame at an exact timestamp and encode with WebCodecs via Mediabunny (no dropped frames,
+// faster than real time, audio rendered offline so it lines up exactly). Fallback: real-time MediaRecorder.
+const MB_URL = "https://cdn.jsdelivr.net/npm/mediabunny@1.63.0/dist/bundles/mediabunny.min.mjs";
+const MIMES = ["video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4", "video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"];
+let lastBlob = null, lastExt = "mp4";
+function setStatus(el, msg, kind) { el.textContent = msg; el.className = "status" + (kind ? " " + kind : ""); }
+const progress = (k) => { $("barFill").style.width = (Math.min(1, k) * 100) + "%"; };
+// yield to the event loop without waiting for a repaint, so export keeps going in a hidden tab
+const nextPaint = () => new Promise((r) => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+
+async function renderMusic() {
+  const sr = 48000, oac = new OfflineAudioContext(2, sr * DUR, sr);
+  music(oac, oac.destination, 0);
+  return oac.startRendering();
+}
+
+async function exportWebCodecs() {
+  if (typeof VideoEncoder === "undefined") return null;
+  let MB; try { MB = await import(MB_URL); } catch (e) { return null; }
+  if (!(await MB.canEncodeVideo("avc", { width: W, height: H, frameRate: FPS, quality: MB.QUALITY_HIGH }))) return null;
+  const output = new MB.Output({ format: new MB.Mp4OutputFormat({ fastStart: "in-memory" }), target: new MB.BufferTarget() });
+  const video = new MB.CanvasSource(cv, { codec: "avc", quality: MB.QUALITY_HIGH, keyFrameInterval: 1 });
+  output.addVideoTrack(video, { frameRate: FPS });
+  let audio = null, note = "";
+  if (cfg.music) {
+    const ac = await MB.getFirstEncodableAudioCodec(["aac", "opus"], { numberOfChannels: 2, sampleRate: 48000 });
+    if (ac) { audio = new MB.AudioBufferSource({ codec: ac, quality: MB.QUALITY_HIGH }); output.addAudioTrack(audio); if (ac !== "aac") note = "ສຽງເປັນ Opus ເພາະບຣາວເຊີນີ້ບໍ່ມີ AAC: ບາງແອັບອາດບໍ່ຫຼິ້ນສຽງ ລອງໃຊ້ Chrome ຫຼື Safari"; }
+    else note = "ບຣາວເຊີນີ້ເຂົ້າລະຫັດສຽງບໍ່ໄດ້ ຄລິບຈຶ່ງບໍ່ມີເພງ";
+  }
+  await output.start();
+  try {
+    const N = FPS * DUR;
+    for (let f = 0; f < N; f++) {
+      frame(f / FPS);
+      await video.add(f / FPS, 1 / FPS);
+      if (f % 10 === 0) { progress(f / N * (audio ? .9 : 1)); $("clock").textContent = `${(f / FPS).toFixed(1)} / ${DUR.toFixed(1)} ວິ`; await nextPaint(); }
+    }
+    if (audio) { setStatus($("status"), "ກຳລັງໃສ່ເພງ…"); await audio.add(await renderMusic()); }
+    await output.finalize();
+  } catch (e) { try { await output.cancel(); } catch (_) {} throw e; }
+  progress(1);
+  return { blob: new Blob([output.target.buffer], { type: "video/mp4" }), ext: "mp4", note };
+}
+
+function recordRealtime() {
+  return new Promise((resolve, reject) => {
+    if (!cv.captureStream || !window.MediaRecorder) { reject(new Error("unsupported")); return; }
+    const mime = MIMES.find((m) => MediaRecorder.isTypeSupported(m)) || "";
+    const ext = mime.includes("mp4") ? "mp4" : "webm";
+    const stream = cv.captureStream(FPS);
+    let ac = null;
+    if (cfg.music) {
+      try { ac = new (window.AudioContext || window.webkitAudioContext)(); ac.resume();
+        const dest = ac.createMediaStreamDestination(); music(ac, dest, ac.currentTime + .05);
+        dest.stream.getAudioTracks().forEach((tr) => stream.addTrack(tr));
+      } catch (err) { ac = null; }
+    }
+    const chunks = [], rec = new MediaRecorder(stream, mime ? { mimeType: mime, videoBitsPerSecond: 8e6 } : undefined);
+    rec.ondataavailable = (ev) => ev.data.size && chunks.push(ev.data);
+    rec.onerror = (ev) => reject(ev.error || new Error("recorder"));
+    rec.onstop = () => {
+      stream.getTracks().forEach((tr) => tr.stop()); if (ac) ac.close(); recording = null;
+      resolve({ blob: new Blob(chunks, { type: mime || "video/webm" }), ext,
+        note: "ບຣາວເຊີນີ້ໃຊ້ໂໝດອັດສຳຮອງ (ອັດຕາມເວລາຈິງ) ຖ້າຄລິບກະຕຸກ ໃຫ້ເປີດໜ້ານີ້ໃນ Chrome ຫຼື Safari ລຸ້ນໃໝ່" +
+          (ext === "webm" ? " · ໄຟລ໌ເປັນ WebM: ອັບຜ່ານ tiktok.com ໃນຄອມໄດ້" : "") });
+    };
+    setStatus($("status"), "ກຳລັງອັດແບບສຳຮອງ 10 ວິນາທີ… ຢູ່ໜ້ານີ້ໄວ້ ຢ່າສະຫຼັບແທັບ");
+    rec.start(250); recording = { rec, start: performance.now() };
+  });
+}
+
+$("f").addEventListener("submit", async (e) => {
+  e.preventDefault(); if (recording || exporting) return; fromForm();
+  $("recBtn").disabled = true; $("bar").hidden = false; progress(0); $("result").hidden = true;
+  setStatus($("status"), "ກຳລັງສ້າງຄລິບ…");
+  await fontsReady;
+  let res = null;
+  try {
+    exporting = true;
+    try { res = await exportWebCodecs(); }
+    catch (err) { console.warn("WebCodecs export failed, using fallback", err); res = null; }
+    finally { exporting = false; }
+    if (!res) res = await recordRealtime();
+  } catch (err) {
+    setStatus($("status"), "ສ້າງຄລິບບໍ່ສຳເລັດ ລອງເປີດໜ້ານີ້ໃນ Chrome ຫຼື Safari ລຸ້ນໃໝ່ແລ້ວກົດໃໝ່", "warn");
+    $("recBtn").disabled = false; $("bar").hidden = true; return;
+  }
+  lastBlob = res.blob; lastExt = res.ext;
+  $("recBtn").disabled = false; $("bar").hidden = true; $("result").hidden = false;
+  const v = $("out"); if (v.src) URL.revokeObjectURL(v.src); v.src = URL.createObjectURL(lastBlob);
+  $("fileInfo").textContent = `${lastExt.toUpperCase()} · ${(lastBlob.size / 1048576).toFixed(1)} MB`;
+  setStatus($("status"), "ສ້າງສຳເລັດແລ້ວ ກວດຄລິບດ້ານລຸ່ມ ແລ້ວກົດບັນທຶກໄຟລ໌", "ok");
+  setStatus($("saveStatus"), res.note || "", res.note ? "warn" : "");
+  $("saveBtn").textContent = "ບັນທຶກໄຟລ໌ ." + lastExt;
+});
+
+// on a normal website (no claude.ai viewer) a plain download link works
+function plainDownload(blob, name) { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); }
+let downloads = null;
+if (window.claude?.use) window.claude.use("downloads").then((d) => { downloads = d; }).catch(() => {});
+$("saveBtn").onclick = async () => {
+  if (!lastBlob) return;
+  const d = new Date(), stamp = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}-${String(d.getHours()).padStart(2, "0")}${String(d.getMinutes()).padStart(2, "0")}`;
+  if (!downloads && !window.claude) { plainDownload(lastBlob, `water-clip-${stamp}.${lastExt}`); setStatus($("saveStatus"), "ດາວໂຫຼດແລ້ວ ເປີດແອັບ TikTok › + › ອັບໂຫຼດ ແລ້ວເລືອກໄຟລ໌ນີ້", "ok"); return; }
+  if (!downloads) { setStatus($("saveStatus"), "ໜ້ານີ້ບັນທຶກໄຟລ໌ບໍ່ໄດ້ຢູ່ບ່ອນນີ້ ໃຫ້ເປີດລິ້ງໃນ claude.ai ແລ້ວລອງໃໝ່", "warn"); return; }
+  try { await downloads.save({ filename: `water-clip-${stamp}.${lastExt}`, data: lastBlob });
+    setStatus($("saveStatus"), "ບັນທຶກແລ້ວ ເປີດແອັບ TikTok › + › ອັບໂຫຼດ ແລ້ວເລືອກໄຟລ໌ນີ້", "ok");
+  } catch (err) {
+    const msg = { declined: "ຍົກເລີກການບັນທຶກແລ້ວ ກົດບັນທຶກໄຟລ໌ໃໝ່ໄດ້", rate_limited: "ມີໜ້າຕ່າງບັນທຶກເປີດຢູ່ ລໍຖ້າຈັກໜ້ອຍແລ້ວລອງໃໝ່", too_large: "ໄຟລ໌ໃຫຍ່ເກີນໄປ ລອງປິດເພງແລ້ວສ້າງໃໝ່" }[err?.code];
+    setStatus($("saveStatus"), msg || "ບັນທຶກບໍ່ສຳເລັດ ລອງເປີດລິ້ງໃນ claude.ai ແລ້ວກົດໃໝ່", "warn");
+  }
+};
+</script>
+
+</body>
+</html>
