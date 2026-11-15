@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="ສະຕູດິໂອຕັດຕໍ່ວິດີໂອໃນບຣາວເຊີ: ນຳເຂົ້າວິດີໂອ ຮູບ ເພງ ສຽງພາກ ຕັດ ແຍກ ໃສ່ຂໍ້ຄວາມ ແລ້ວສົ່ງອອກ MP4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ສະຕູດິໂອ · ຕັດຕໍ່ວິດີໂອ ແລະ AI ສ້າງຄລິບ">
+<meta property="og:description" content="ສະຕູດິໂອຕັດຕໍ່ວິດີໂອໃນບຣາວເຊີ: ນຳເຂົ້າວິດີໂອ ຮູບ ເພງ ສຽງພາກ ຕັດ ແຍກ ໃສ່ຂໍ້ຄວາມ ແລ້ວສົ່ງອອກ MP4">
+<meta property="og:url" content="https://ksaiyasen-eng.github.io/studio-web/">
+<meta property="og:image" content="https://ksaiyasen-eng.github.io/studio-web/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e1115">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon.png">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.site-nav{display:flex;gap:16px;padding:8px 16px;font-size:13px;background:#0b0e12;border-bottom:1px solid #222a33}.site-nav a{color:#9fc4ff;text-decoration:none;padding:4px 0}.site-nav a[aria-current]{color:#fff;font-weight:700}</style>
 </head>
 <body>
@@ -453,7 +464,7 @@ function addToTimeline(mediaId, select = true) {
   const m = media.get(mediaId); if (!m) return;
   const c = { id: nid(), kind: "media", mediaId, in: 0, out: m.kind === "image" ? 3 : m.duration };
   // replace the starter colour card the first time real footage arrives
-  if (P.clips.length === 1 && P.clips[0].kind === "color" && !P.clips[0].touched) P.clips = [];
+  if (P.clips.length === 1 && P.clips[0].kind === "color" && !P.clips[0].touched) { P.clips = []; P.texts = P.texts.filter((t) => !isPlaceholder(t.text)); }
   P.clips.push(c); if (select) sel = { type: "clip", id: c.id };
   renderTimeline(); renderInspector();
 }
@@ -999,6 +1010,7 @@ function needSecs(text) { // reading time: ~2 words/s for spaced scripts, ~12 ch
   const n = LAO.test(t) || THAI.test(t) ? t.replace(/\s/g, "").length / 12 : t.split(" ").length / 2;
   return Math.max(1.2, +n.toFixed(1));
 }
+function isPlaceholder(s) { return s === "ພິມຂໍ້ຄວາມຂອງທ່ານ" || s === "ຂໍ້ຄວາມໃໝ່" || /^ພິມ(ຄຳຖາມ|ປະໂຫຍກປິດ)/.test(s); }
 function findIssues() {
   const out = [], L = total(), starts = clipStarts();
   const selText = (t) => () => { sel = { type: "text", id: t.id }; seek(t.start); renderTimeline(); renderInspector(); };
@@ -1013,6 +1025,8 @@ function findIssues() {
   // 2. per-caption checks
   P.texts.forEach((t) => {
     if (!t.text.trim()) return;
+    if (isPlaceholder(t.text.trim())) { out.push({ level: "fix", msg: `ຍັງມີຂໍ້ຄວາມຕົວຢ່າງ "${t.text.slice(0, 24)}"`, hint: "ແກ້ເປັນຂໍ້ຄວາມຂອງທ່ານ ຫຼື ລຶບອອກ ບໍ່ດັ່ງນັ້ນຈະຕິດໄປໃນວິດີໂອ", t: t.start, go: selText(t),
+      fixLabel: "ລຶບອອກ", fix: () => { P.texts = P.texts.filter((x) => x !== t); } }); return; }
     const need = needSecs(t.text), have = t.end - t.start;
     if (have + 0.05 < need) out.push({ level: "fix", msg: `ຂໍ້ຄວາມ "${t.text.slice(0, 24)}" ຂຶ້ນ ${have.toFixed(1)} ວິ ອ່ານບໍ່ທັນ`, hint: `ຄວນຢູ່ຢ່າງໜ້ອຍ ${need} ວິ`, t: t.start, go: selText(t),
       fixLabel: `ຂະຫຍາຍເປັນ ${need} ວິ`, fix: () => { t.end = +(t.start + need).toFixed(2); } });
