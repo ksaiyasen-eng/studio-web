@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="ແມ່ແບບຄລິບກາຕູນສົ່ງນ້ຳດື່ມ 10 ວິນາທີ ແນວຕັ້ງສຳລັບ TikTok">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}.site-nav{display:flex;gap:16px;padding:8px 16px;font-size:13px;background:#0b0e12;border-bottom:1px solid #222a33}.site-nav a{color:#9fc4ff;text-decoration:none;padding:4px 0}.site-nav a[aria-current]{color:#fff;font-weight:700}</style>
 </head>
 <body>
+<nav class="site-nav" aria-label="ໜ້າ"><a href="./">ສະຕູດິໂອ</a><a href="water.html" aria-current="page">ແມ່ແບບຄລິບສົ່ງນ້ຳ</a></nav>
 <title>ສະຕູດິໂອຄລິບສົ່ງນ້ຳ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,7 +93,7 @@ button { font: inherit; cursor: pointer; border-radius: 8px; }
     <form id="f" autocomplete="off">
       <fieldset>
         <legend>ຂໍ້ຄວາມເທິງຈໍ</legend>
-        <label>ຫົວເລື່ອງ <small>ຂຶ້ນທີ່ 0.3 ວິ</small><input type="text" id="title" maxlength="40"></label>
+        <label>ຫົວເລື່ອງ <small>ຂຶ້ນຕັ້ງແຕ່ເລີ່ມ</small><input type="text" id="title" maxlength="40"></label>
         <div class="row">
           <label>ຂໍ້ຄວາມຮອງ <small>1.2 ວິ</small><input type="text" id="subtitle" maxlength="40"></label>
           <label>ຂໍ້ຄວາມຂ້າງລົດ <small>ສັ້ນໆ</small><input type="text" id="side" maxlength="20"></label>
@@ -266,7 +267,7 @@ function frame(t) {
   rr(0, G - 40, W, H, 0, "rgb(70,75,85)"); rr(0, G - 40, W, G - 28, 0, "rgb(230,230,230)");
   for (let i = -1; i < 8; i++) { const lx = i * 220 - s % 220; rr(lx, G + 130, lx + 120, G + 150, 0, "rgb(255,220,90)"); }
   if (t > 1 && t < 7.4) for (let i = 0; i < 8; i++) { const ly = 700 + (i * 97) % 600, lx = W - ((f * 60 + i * 300) % (W + 600)); ln(lx, ly, lx + 160, ly, "rgba(255,255,255,.9)", 5); }
-  const tx = -820 + 960 * ease(t / 1.2) - 270 * ease((t - 7) / 1.5);
+  const tx = -420 + 560 * ease(t / 1.2) - 270 * ease((t - 7) / 1.5); /* truck half in frame at t=0 */
   const moving = speedAt(f) > .5 || t < 1.2;
   truck(tx, moving ? 5 * Math.sin(t * 2 * Math.PI * 4) : 0, -s / 62, t);
   if (t > 8.3) {
@@ -275,7 +276,7 @@ function frame(t) {
     if (k >= 1) for (let i = 0; i < 5; i++) { const a = i * 2 * Math.PI / 5 + t * 3; star(x1 + 40 + 110 * Math.cos(a), y1 + 50 + 110 * Math.sin(a), 22 + 6 * Math.sin(t * 12 + i)); }
   }
   const cx = W / 2 - 40; // keep clear of TikTok's right-side buttons
-  say(cfg.title, cx, 330, 104, (t - .3) / .5, "#fff");
+  say(cfg.title, cx, 330, 104, 1, "#fff"); /* whole from frame 0: it is the thumbnail */
   say(cfg.subtitle, cx, 480, 80, (t - 1.2) / .5, "rgb(255,230,90)");
   say(cfg.tagline, cx, 640, 70, (t - 7.6) / .5, "#fff");
   say(cfg.cta, cx, 800, 130, (t - 8.8) / .5, "rgb(255,90,90)", "#fff");
